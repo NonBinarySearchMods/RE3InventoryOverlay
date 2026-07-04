@@ -11,10 +11,8 @@ if (-Not (Test-Path ./venv))
 python ./split.py
 
 if (Test-Path ./output) {
-    Remove-Item ./output -r -fo
+    Remove-Item ./output -Recurse -Force
 }
-New-Item -Name "output" -ItemType "Directory"
-New-Item -Path "./output" -Name "reframework" -ItemType "Directory"
 New-Item -Path "./output/reframework" -Name "fonts" -ItemType "Directory"
 New-Item -Path "./output/reframework" -Name "images" -ItemType "Directory"
 New-Item -Path "./output/reframework" -Name "autorun" -ItemType "Directory"

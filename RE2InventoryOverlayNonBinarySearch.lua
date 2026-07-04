@@ -247,7 +247,7 @@ local settings = {
     margin_top = 240,
     margin_left = 40,
     margin_between = 5,
-    textsize = 16
+    textsize = 14
 }
 local settingsfile = "NonBinarySearchRE2InventoryOverlay.json"
 
@@ -376,7 +376,7 @@ end
 
 local function draw_text_below_image(s, col, row, is_fat)
     text_height = fontsize * 0.65
-    text_width = string.len(s) * fontsize * 0.45
+    text_width = string.len(s) * fontsize * 0.58
     local x, y = get_base_coord(col, row)
     local h = unit
     local w = unit
