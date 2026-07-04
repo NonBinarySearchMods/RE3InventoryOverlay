@@ -391,12 +391,12 @@ local function draw_text_below_image(s, col, row, is_fat)
     )
 end
 
-local function draw_item(image, col, row, item_number, item_state)
+local function draw_item(image, col, row, item_number, item_state, is_fat)
     local x,y,w,h = draw_image(image, col, row)
     if item_state.is_infinite_use and not item_state.is_removable then
-        draw_text_below_image("[K]", col, row, false)
+        draw_text_below_image("[K]", col, row, is_fat)
     elseif not item_state.is_infinite_use then
-        draw_text_below_image(tostring(item_number), col, row, false)
+        draw_text_below_image(tostring(item_number), col, row, is_fat)
     end
 end
 
@@ -477,9 +477,9 @@ local function inventory_overlay_d2d_draw()
                 local item_number = slot:call("get_Number")
                 local image = images[string.format("items/%d", item_id)]
                 if not image then
-                    draw_error(col, row, slot:call("get_IsFatSlot"))
+                    draw_error(col, row, is_fat)
                 else
-                    draw_item(image, col, row, item_number, get_item_state(item_id))
+                    draw_item(image, col, row, item_number, get_item_state(item_id), is_fat)
                 end
             elseif slot:call("get_IsWeapon") then
                 local weapon_id = slot:call("get_WeaponType")
@@ -492,7 +492,7 @@ local function inventory_overlay_d2d_draw()
                 end
                 local image = images[string.format("weapons/%d,%d", weapon_id, attachments)]
                 if not image then
-                    draw_error(col, row, slot:call("get_IsFatSlot"))
+                    draw_error(col, row, is_fat)
                 else
                     draw_weapon(image, col, row, {
                         current_ammo = current_ammo,
