@@ -54,6 +54,10 @@ local function get_item_state(item_id)
     }
 end
 
+local function my_rgba(red, green, blue, alpha)
+    return ((alpha << 24) | (red << 16) | (green << 8) | blue)
+end
+
 local items = {
     "1",
     "10",
@@ -348,8 +352,8 @@ local function inventory_overlay_d2d_initialize()
 end
 
 local function draw_text_shadowed(s, x, y)
-    local fc = rgba(255, 255, 255, 240)
-    local sc = rgba(0, 0, 0, 240)
+    local fc = my_rgba(255, 255, 255, 240)
+    local sc = my_rgba(0, 0, 0, 240)
     local shadowoffset = math.max(math.floor(uiscale * 0.8), 1)
     d2d.text(font, s, x + shadowoffset, y + shadowoffset, sc)
     d2d.text(font, s, x + (shadowoffset * 2), y + (shadowoffset * 2), sc)
@@ -419,8 +423,8 @@ local function draw_weapon(image, col, row, weapon_state)
 end
 
 local function draw_border(col, row, is_fat)
-    local fc = rgba(255, 255, 255, 240)
-    local sc = rgba(0, 0, 0, 240)
+    local fc = my_rgba(255, 255, 255, 240)
+    local sc = my_rgba(0, 0, 0, 240)
     local shadowoffset = math.max(math.floor(uiscale * 0.8), 1)
     local x,y = get_base_coord(col, row)
     local w = unit
@@ -443,7 +447,7 @@ local function draw_error(col, row, is_fat)
     end
     local h = unit + padding
     local thickness = 1
-    local red = rgba(255, 0, 0, 255)
+    local red = my_rgba(255, 0, 0, 255)
     d2d.line(x, y, x + w, y + h, thickness, red)
     d2d.line(x, y + h, x + w, y, thickness, red)
 end
