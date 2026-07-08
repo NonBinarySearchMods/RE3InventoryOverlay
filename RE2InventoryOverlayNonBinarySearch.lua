@@ -2,7 +2,7 @@ local known_typeofs = {}
 local function get_component(game_object, type_name)
     local t = known_typeofs[type_name] or sdk.typeof(type_name)
 
-    if t == nil then 
+    if t == nil then
         return nil
     end
 
@@ -299,7 +299,7 @@ local fontsize = nil
 local unit = nil
 
 local function load_item_images()
-    for k,v in pairs(items) do
+    for _,v in pairs(items) do
         local path = string.format("%s/items/%s.png", path_prefix, v)
         local image = d2d.Image.new(path)
         if image == nil then
@@ -311,7 +311,7 @@ local function load_item_images()
 end
 
 local function load_weapon_images()
-    for k,v in pairs(weapons) do
+    for _,v in pairs(weapons) do
         local path = string.format("%s/weapons/%s.png", path_prefix, v)
         local image = d2d.Image.new(path)
         if image == nil then
@@ -375,12 +375,11 @@ local function draw_image(image, col, row)
         x + padding, y + padding / 2,
         adjusted_w, adjusted_h
     )
-    return x + padding, y + padding, adjusted_w, adjusted_h
 end
 
 local function draw_text_below_image(s, col, row, is_fat)
-    text_height = fontsize * 0.65
-    text_width = string.len(s) * fontsize * 0.58
+    local text_height = fontsize * 0.65
+    local text_width = string.len(s) * fontsize * 0.58
     local x, y = get_base_coord(col, row)
     local h = unit
     local w = unit
@@ -396,7 +395,7 @@ local function draw_text_below_image(s, col, row, is_fat)
 end
 
 local function draw_item(image, col, row, item_number, item_state, is_fat)
-    local x,y,w,h = draw_image(image, col, row)
+    draw_image(image, col, row)
     if item_state.is_infinite_use and not item_state.is_removable then
         draw_text_below_image("[K]", col, row, is_fat)
     elseif not item_state.is_infinite_use then
@@ -405,8 +404,8 @@ local function draw_item(image, col, row, item_number, item_state, is_fat)
 end
 
 local function draw_weapon(image, col, row, weapon_state)
-    local x,y,w,h = draw_image(image, col, row)
-    local s = ""
+    draw_image(image, col, row)
+    local s
     if weapon_state.max_ammo < 0 and weapon_state.current_ammo < 0 then
         s = "inf"
     elseif weapon_state.max_ammo < 0 then

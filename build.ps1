@@ -32,7 +32,14 @@ screenshot=screenshot.png
 Out-File -FilePath "./output/modinfo.ini" -InputObject $modinfo
 Copy-Item "./screenshot.png" -Destination "./output/"
 
+& luacheck .\RE2InventoryOverlayNonBinarySearch.lua --config .\.luacheckrc
+if ($LastExitCode -ne 0) {
+    Write-Error "luacheck failed"
+    exit
+}
+
 Copy-Item "./RE2InventoryOverlayNonBinarySearch.lua" -Destination "./output/reframework/autorun"
+
 Copy-Item "./assets/NotoSansMono-SemiBold.ttf" -Destination "./output/reframework/fonts"
 Copy-Item "./assets/items" -Filter "*.png" -Destination "./output/reframework/images/NonBinarySearchInventoryOverlay/items/" -Recurse
 Copy-Item "./assets/weapons" -Filter "*.png" -Destination "./output/reframework/images/NonBinarySearchInventoryOverlay/weapons/" -Recurse
