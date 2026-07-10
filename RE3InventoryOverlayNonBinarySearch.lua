@@ -188,7 +188,7 @@ local settings = {
     margin_between = 5,
     textsize = 14
 }
-local settingsfile = "NonBinarySearchRE2InventoryOverlay.json"
+local settingsfile = "NonBinarySearchRE3InventoryOverlay.json"
 
 local function rt(t, k, d)
     if t[k] ~= nil then
